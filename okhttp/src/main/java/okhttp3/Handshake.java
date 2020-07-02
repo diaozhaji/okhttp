@@ -87,6 +87,14 @@ public final class Handshake {
         Util.immutableList(localCertificates));
   }
 
+  public static Handshake post(TlsVersion tlsVersion, CipherSuite cipherSuite,
+                              List<Certificate> peerCertificates, List<Certificate> localCertificates) {
+    if (tlsVersion == null) throw new NullPointerException("tlsVersion == null");
+    if (cipherSuite == null) throw new NullPointerException("cipherSuite == null");
+    return new Handshake(tlsVersion, cipherSuite, Util.immutableList(peerCertificates),
+            Util.immutableList(localCertificates));
+  }
+
   /**
    * Returns the TLS version used for this connection. This value wasn't tracked prior to OkHttp
    * 3.0. For responses cached by preceding versions this returns {@link TlsVersion#SSL_3_0}.
